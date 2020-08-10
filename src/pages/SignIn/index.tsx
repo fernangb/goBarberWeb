@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useContext } from 'react';
+import React, { useRef, useCallback } from 'react';
 import { FiLogIn, FiMail, FiLock } from 'react-icons/fi';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
@@ -10,7 +10,7 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 import getValidationErrors from '../../utils/getValidationErrors';
 
-import { AuthContext } from '../../context/AuthContext';
+import { useAuth } from '../../hooks/AuthContext';
 
 interface SignInFormData {
   email: string;
@@ -20,16 +20,16 @@ interface SignInFormData {
 const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
-  const { signIn } = useContext(AuthContext);
+  const { user, signIn } = useAuth();
+
+  console.log(user);
 
   const handleSubmit = useCallback(
     async (data: SignInFormData) => {
       formRef.current?.setErrors({});
 
       try {
-        console.log('Vou logar');
         const schema = Yup.object().shape({
-          name: Yup.string().required('Nome obrigatório'),
           email: Yup.string()
             .required('Email obrigatório')
             .email('Digite um e-mail válido'),
@@ -40,7 +40,6 @@ const SignIn: React.FC = () => {
           abortEarly: false,
         });
 
-        console.log('Loguei');
         signIn({
           email: data.email,
           password: data.password,
