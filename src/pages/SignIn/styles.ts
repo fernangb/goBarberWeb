@@ -29,10 +29,9 @@ export const Content = styled.div`
       display: block;
       margin-top: 24px;
       text-decoration: none;
-      transition: background-color 0.2s;
 
       &:hover {
-        background: ${shade(0.2, '#f4ede8')};
+        color: ${shade(0.2, '#f4ede8')};
       }
     }
   }
@@ -42,7 +41,6 @@ export const Content = styled.div`
     display: block;
     margin-top: 24px;
     text-decoration: none;
-    transition: background-color 0.2s;
     display: flex;
     align-items: center;
 
@@ -51,7 +49,7 @@ export const Content = styled.div`
     }
 
     &:hover {
-      background: ${shade(0.2, '#ff9000')};
+      color: ${shade(0.2, '#ff9000')};
     }
   }
 `;
